@@ -3,7 +3,7 @@
  * Plugin Name: WP Plugin Inspector
  * Plugin URI: https://wp.yugc.in/wp-plugin-inspector
  * Description: Scans installed WordPress plugins for duplicate functionality, likely conflicts, security risk signals, and performance pressure.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: Yug Chapherkar
  * Requires at least: 6.0
  * Requires PHP: 8.0
