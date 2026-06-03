@@ -1,0 +1,250 @@
+.wpi-wrap {
+    max-width: 1180px;
+}
+
+.wpi-header {
+    align-items: center;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    margin: 24px 0;
+}
+
+.wpi-header h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+}
+
+.wpi-header p,
+.wpi-muted {
+    color: #646970;
+    font-size: 14px;
+    margin: 0;
+}
+
+.wpi-status {
+    color: #1d2327;
+    font-weight: 600;
+    min-height: 24px;
+}
+
+.wpi-upload-panel {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    margin: 0 0 20px;
+    padding: 18px;
+}
+
+.wpi-upload-panel h2 {
+    margin: 0 0 8px;
+}
+
+.wpi-upload-panel p {
+    color: #646970;
+    margin: 0 0 12px;
+}
+
+.wpi-upload-panel textarea {
+    display: block;
+    margin: 0 0 12px;
+    max-width: 680px;
+    width: 100%;
+}
+
+.wpi-actions {
+    margin: 18px 0;
+    text-align: right;
+}
+
+.wpi-empty {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    color: #646970;
+    padding: 32px;
+    text-align: center;
+}
+
+.wpi-cards {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 20px 0;
+}
+
+.wpi-card,
+.wpi-panel,
+.wpi-issue,
+.wpi-recommendation {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+}
+
+.wpi-card {
+    padding: 18px;
+}
+
+.wpi-card span,
+.wpi-card small {
+    color: #646970;
+    display: block;
+}
+
+.wpi-card strong {
+    color: #1d2327;
+    display: block;
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 8px 0;
+}
+
+.wpi-tabs {
+    border-bottom: 1px solid #dcdcde;
+    display: flex;
+    gap: 8px;
+    margin: 24px 0 16px;
+}
+
+.wpi-tabs a {
+    color: #1d2327;
+    padding: 10px 12px;
+    text-decoration: none;
+}
+
+.wpi-tabs a:hover,
+.wpi-tabs a:focus {
+    color: #135e96;
+}
+
+.wpi-panel {
+    margin: 0 0 18px;
+    padding: 20px;
+}
+
+.wpi-panel h2 {
+    margin: 0 0 16px;
+}
+
+.wpi-table code {
+    font-size: 12px;
+}
+
+.wpi-pill,
+.wpi-update,
+.wpi-severity {
+    border-radius: 999px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 5px 8px;
+}
+
+.wpi-pill {
+    background: #f0f0f1;
+    color: #50575e;
+}
+
+.wpi-pill.is-active {
+    background: #edfaef;
+    color: #008a20;
+}
+
+.wpi-update {
+    background: #fcf9e8;
+    color: #996800;
+    margin-top: 6px;
+}
+
+.wpi-severity-low {
+    background: #f0f6fc;
+    color: #135e96;
+}
+
+.wpi-severity-medium {
+    background: #fcf9e8;
+    color: #996800;
+}
+
+.wpi-severity-high {
+    background: #fcf0f1;
+    color: #b32d2e;
+}
+
+.wpi-issue-list,
+.wpi-recommendations {
+    display: grid;
+    gap: 12px;
+}
+
+.wpi-issue,
+.wpi-recommendation {
+    padding: 16px;
+}
+
+.wpi-issue h3 {
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 0 0 8px;
+}
+
+.wpi-issue p,
+.wpi-recommendation p {
+    margin: 10px 0 0;
+}
+
+.wpi-two-col {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+    .wpi-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wpi-header,
+    .wpi-two-col {
+        align-items: stretch;
+        grid-template-columns: 1fr;
+    }
+
+    .wpi-header {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .wpi-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .wpi-tabs {
+        flex-wrap: wrap;
+    }
+}
+
+@media print {
+    #adminmenumain,
+    #wpadminbar,
+    #wpfooter,
+    .notice,
+    .wpi-header .button,
+    .wpi-upload-panel,
+    .wpi-actions,
+    .wpi-tabs {
+        display: none !important;
+    }
+
+    #wpcontent {
+        margin-left: 0 !important;
+    }
+
+    .wpi-panel,
+    .wpi-card {
+        break-inside: avoid;
+    }
+}
