@@ -61,6 +61,18 @@ final class WPI_Admin
             </div>
 
             <div class="wpi-upload-panel">
+                <h2><?php esc_html_e('Client Report Details', 'wp-plugin-inspector'); ?></h2>
+                <div class="wpi-report-fields">
+                    <label>
+                        <?php esc_html_e('Agency / freelancer name', 'wp-plugin-inspector'); ?>
+                        <input id="wpi-agency-name" type="text" placeholder="Yug Chapherkar">
+                    </label>
+                    <label>
+                        <?php esc_html_e('Client / site name', 'wp-plugin-inspector'); ?>
+                        <input id="wpi-client-name" type="text" placeholder="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                    </label>
+                </div>
+
                 <h2><?php esc_html_e('Analyze Plugin List', 'wp-plugin-inspector'); ?></h2>
                 <p><?php esc_html_e('Paste plugin slugs or names, one per line, to check known duplicate and conflict rules before touching a live site.', 'wp-plugin-inspector'); ?></p>
                 <textarea id="wpi-plugin-list" rows="5" placeholder="wordpress-seo&#10;seo-by-rank-math&#10;wp-rocket"></textarea>

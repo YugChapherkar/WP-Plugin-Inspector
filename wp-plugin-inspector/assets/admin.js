@@ -27,13 +27,23 @@
     }
 
     function renderPluginTable(plugins) {
-        return '<table class="widefat striped wpi-table"><thead><tr><th>Plugin</th><th>Version</th><th>Status</th><th>Category</th><th>Author</th></tr></thead><tbody>' +
+        return '<table class="widefat striped wpi-table"><thead><tr><th>Plugin</th><th>Version</th><th>Status</th><th>Category</th><th>WordPress.org Metadata</th><th>Author</th></tr></thead><tbody>' +
             plugins.map(function (plugin) {
+                var meta = plugin.metadata || {};
+                var metadata = meta.last_updated ?
+                    'Updated: ' + esc(meta.last_updated) +
+                    '<br>Tested: ' + esc(meta.tested || '-') +
+                    '<br>Requires WP: ' + esc(meta.requires || '-') +
+                    '<br>Requires PHP: ' + esc(meta.requires_php || '-') +
+                    '<br>Installs: ' + esc(meta.active_installs || '-') :
+                    '-';
+
                 return '<tr>' +
                     '<td><strong>' + esc(plugin.name) + '</strong><br><code>' + esc(plugin.slug) + '</code></td>' +
                     '<td>' + esc(plugin.version) + (plugin.update_available ? '<br><span class="wpi-update">Update: ' + esc(plugin.new_version) + '</span>' : '') + '</td>' +
                     '<td>' + (plugin.active ? '<span class="wpi-pill is-active">Active</span>' : '<span class="wpi-pill">Inactive</span>') + '</td>' +
                     '<td>' + esc(plugin.category || '-') + '</td>' +
+                    '<td>' + metadata + '</td>' +
                     '<td>' + esc(plugin.author || '-') + '</td>' +
                 '</tr>';
             }).join('') +
@@ -91,7 +101,24 @@
             '<table class="widefat striped"><tbody>' + envRows + '</tbody></table></div></section>';
     }
 
+    function renderScoreFactors(factors) {
+        if (!factors || !factors.length) {
+            return '';
+        }
+
+        return '<section class="wpi-panel"><h2>Score Breakdown</h2><div class="wpi-issue-list">' +
+            factors.map(function (factor) {
+                return '<article class="wpi-issue">' +
+                    '<div><span class="' + severityClass(factor.severity) + '">' + esc(factor.severity) + '</span><h3>' + esc(factor.label) + '</h3></div>' +
+                    '<p>' + esc(factor.impact) + '</p>' +
+                '</article>';
+            }).join('') +
+            '</div></section>';
+    }
+
     function renderResults(data) {
+        var agency = $('#wpi-agency-name').val() || 'Agency Audit';
+        var client = $('#wpi-client-name').val() || 'WordPress Site';
         var security = data.security || { warnings: [] };
         var scores = data.scores || {
             health: '-',
@@ -112,10 +139,12 @@
             };
         });
 
-        return '<div class="wpi-actions"><button type="button" id="wpi-print-report" class="button">Generate Client Report</button></div>' +
+        return '<div class="wpi-report-title"><h2>WordPress Plugin Health Audit Report</h2><p><strong>' + esc(client) + '</strong> &middot; Prepared by ' + esc(agency) + ' &middot; Generated ' + esc(data.generated_at) + '</p></div>' +
+            '<div class="wpi-actions"><button type="button" id="wpi-print-report" class="button">Generate Client Report</button></div>' +
             renderCards(scores) +
             '<nav class="wpi-tabs" aria-label="Report sections"><a href="#wpi-overview">Overview</a><a href="#wpi-conflicts">Conflicts</a><a href="#wpi-security">Security</a><a href="#wpi-performance">Performance</a><a href="#wpi-recommendations">Recommendations</a></nav>' +
             '<section id="wpi-overview" class="wpi-panel"><h2>Plugin Inventory</h2>' + renderPluginTable(data.plugins) + '</section>' +
+            renderScoreFactors(data.score_factors) +
             '<div id="wpi-conflicts">' + renderIssues('Conflicts', data.conflicts, 'No known conflict rules matched this scan.') + renderIssues('Duplicate Functionality', data.duplicates, 'No duplicate functionality groups were detected.') + '</div>' +
             '<div id="wpi-security">' + (data.security ? renderIssues('Security', securityIssues, 'No update or vulnerability warnings were found by the local MVP scanner.') : '') + '</div>' +
             '<div id="wpi-performance">' + (data.performance ? renderPerformance(data.performance, data.environment) : '') + '</div>' +

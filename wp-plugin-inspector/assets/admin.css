@@ -45,6 +45,25 @@
     margin: 0 0 12px;
 }
 
+.wpi-report-fields {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 0 18px;
+    max-width: 680px;
+}
+
+.wpi-report-fields label {
+    color: #1d2327;
+    font-weight: 600;
+}
+
+.wpi-report-fields input {
+    display: block;
+    margin-top: 6px;
+    width: 100%;
+}
+
 .wpi-upload-panel textarea {
     display: block;
     margin: 0 0 12px;
@@ -55,6 +74,20 @@
 .wpi-actions {
     margin: 18px 0;
     text-align: right;
+}
+
+.wpi-report-title {
+    margin: 22px 0 8px;
+}
+
+.wpi-report-title h2 {
+    font-size: 24px;
+    margin: 0 0 4px;
+}
+
+.wpi-report-title p {
+    color: #646970;
+    margin: 0;
 }
 
 .wpi-empty {
@@ -224,6 +257,10 @@
 
     .wpi-tabs {
         flex-wrap: wrap;
+    }
+
+    .wpi-report-fields {
+        grid-template-columns: 1fr;
     }
 }
 
